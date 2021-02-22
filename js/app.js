@@ -5,6 +5,7 @@ let attempt = 1;
 let arrayObject = [];
 let arrayOfvote = [];
 let arrayOfShown = [];
+let arrayOfPictureName=[];
 
 let leftImg = document.getElementById("leftImg");
 let middleImg = document.getElementById("middleImg");
@@ -15,30 +16,32 @@ function busMall(name, source) {
   this.source = source;
   this.vote = 0;
   this.numOfShown = 0;
+  
 
   arrayObject.push(this);
+  arrayOfPictureName.push(this.name);
 }
 
-new busMall("bag", "/Imgs/bag.jpg");
-new busMall("banana", "/Imgs/banana.jpg");
-new busMall("bathroom", "/Imgs/bathroom.jpg");
-new busMall("boots", "/Imgs/boots.jpg");
-new busMall("breakfast", "/Imgs/breakfast.jpg");
-new busMall("bubblegum", "/Imgs/bubblegum.jpg");
-new busMall("chair", "/Imgs/chair.jpg");
-new busMall("cthulhu", "/Imgs/cthulhu.jpg");
-new busMall("dog-duck", "/Imgs/dog-duck.jpg");
-new busMall("dragon", "/Imgs/dragon.jpg");
-new busMall("pen", "/Imgs/pen.jpg");
-new busMall("pet-sweep", "/Imgs/pet-sweep.jpg");
-new busMall("scissors", "/Imgs/scissors.jpg");
-new busMall("shark", "/Imgs/shark.jpg");
-new busMall("sweep", "/Imgs/sweep.png");
-new busMall("tauntaun", "/Imgs/tauntaun.jpg");
-new busMall("unicorn", "/Imgs/unicorn.jpg");
-new busMall("usb", "/Imgs/usb.gif");
-new busMall("water-can", "/Imgs/water-can.jpg");
-new busMall("wine-glass", "/Imgs/wine-glass.jpg");
+new busMall("bag", "Imgs/bag.jpg");
+new busMall("banana", "Imgs/banana.jpg");
+new busMall("bathroom", "Imgs/bathroom.jpg");
+new busMall("boots", "Imgs/boots.jpg");
+new busMall("breakfast", "Imgs/breakfast.jpg");
+new busMall("bubblegum", "Imgs/bubblegum.jpg");
+new busMall("chair", "Imgs/chair.jpg");
+new busMall("cthulhu", "Imgs/cthulhu.jpg");
+new busMall("dog-duck", "Imgs/dog-duck.jpg");
+new busMall("dragon", "Imgs/dragon.jpg");
+new busMall("pen", "Imgs/pen.jpg");
+new busMall("pet-sweep", "Imgs/pet-sweep.jpg");
+new busMall("scissors", "Imgs/scissors.jpg");
+new busMall("shark", "Imgs/shark.jpg");
+new busMall("sweep", "Imgs/sweep.png");
+new busMall("tauntaun", "Imgs/tauntaun.jpg");
+new busMall("unicorn", "Imgs/unicorn.jpg");
+new busMall("usb", "Imgs/usb.gif");
+new busMall("water-can", "Imgs/water-can.jpg");
+new busMall("wine-glass", "Imgs/wine-glass.jpg");
 
 ////////////three randome img
 let leftImgIndex;
@@ -145,8 +148,43 @@ function clickingOn(event) {
       arrayOfvote.push(arrayObject[v].vote);
       arrayOfShown.push[arrayObject[v].numOfShown];
     }
+    
   }
+  chartBusMall();
 
  let resultButton = document.getElementById("bnt");
-resultButton.addEventListener("click", clickingOn);
+ resultButton.addEventListener("click", clickingOn);
+}
+
+function chartBusMall(){
+
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: arrayOfPictureName,
+        datasets: [{
+            label: 'Number Of Votes',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5, 2, 20, 30, 45]
+        },{
+
+            label: 'Nmber Of Veiws',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5, 2, 20, 30, 45]
+    }]
+    },
+
+  
+
+    // Configuration options go here
+    options: {}
+});
+
+
 }
