@@ -48,6 +48,17 @@ let leftImgIndex;
 let middleImgIndex;
 let rightImgIndex;
 
+function testImage(index ,arr){
+  for (let i =0 ; i < arr.length ; i++){
+    if (arr[i]===index){
+      return true;
+    }
+  }
+return false;
+}
+
+let imageIndexFirst=[ leftImgIndex,middleImgIndex,rightImgIndex];
+
 function renderThreeRandomImgs() {
   
     leftImgIndex=generatRandomIndex();
@@ -56,25 +67,25 @@ function renderThreeRandomImgs() {
 
     let same =true;
 
-   while(same)
+   while(same){
 
-  if (leftImgIndex === middleImgIndex || leftImgIndex === rightImgIndex) {
+  if (testImage( leftImgIndex,imageIndexFirst) {
     leftImgIndex = generatRandomIndex();
     
   } else if (
-    middleImgIndex === leftImgIndex ||middleImgIndex === rightImgIndex) {
+    middleImgIndex === leftImgIndex ||testImage(middleImgIndex,imageIndexFirst)) {
     
       middleImgIndex = generatRandomIndex();
   
   } else if (
-    rightImgIndex === leftImgIndex ||rightImgIndex === middleImgIndex) {
+    rightImgIndex === leftImgIndex ||rightImgIndex === middleImgIndex||testImage(rightImgIndex,imageIndexFirst)) {
     
       rightImgIndex = generatRandomIndex();
     
   }
 
   else {same=false;}
-
+   }
   console.log(leftImgIndex);
   console.log(middleImgIndex);
   console.log(rightImgIndex);
@@ -152,10 +163,10 @@ function clickingOn(event) {
       arrayOfvote.push(arrayObject[v].vote);
       arrayOfShown.push[arrayObject[v].numOfShown];
     }
-    
+    chartBusMall();
   }
   
-  chartBusMall();
+  
   
 
  let resultButton = document.getElementById("bnt");
