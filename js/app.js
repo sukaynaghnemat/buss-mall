@@ -1,7 +1,7 @@
 "use strict";
 
 let maxClick = 25;
-let attempt = 1;
+let attempt = 0;
 let arrayObject = [];
 let arrayOfvote = [];
 let arrayOfShown = [];
@@ -54,22 +54,26 @@ function renderThreeRandomImgs() {
     middleImgIndex=generatRandomIndex();
     rightImgIndex=generatRandomIndex();
 
+    let same =true;
+
+   while(same)
+
   if (leftImgIndex === middleImgIndex || leftImgIndex === rightImgIndex) {
     leftImgIndex = generatRandomIndex();
-    //arrayObject[leftImgI].vote++;
+    
   } else if (
-    middleImgIndex === leftImgIndex ||
-    middleImgIndex === rightImgIndex
-  ) {
-    middleImgIndex = generatRandomIndex();
-    //arrayObject[middleImgI].vote++;
+    middleImgIndex === leftImgIndex ||middleImgIndex === rightImgIndex) {
+    
+      middleImgIndex = generatRandomIndex();
+  
   } else if (
-    rightImgIndex === leftImgIndex ||
-    rightImgIndex == middleImgIndex
-  ) {
-    rightImgIndex = generatRandomIndex();
-    //arrayObject[rightImgtIndex].vote++;
+    rightImgIndex === leftImgIndex ||rightImgIndex === middleImgIndex) {
+    
+      rightImgIndex = generatRandomIndex();
+    
   }
+
+  else {same=false;}
 
   console.log(leftImgIndex);
   console.log(middleImgIndex);
@@ -123,7 +127,7 @@ function clickingOn(event) {
     } else if (event.target.id === "rightImg") {
       arrayObject[rightImgIndex].vote++;
     }
-
+    savedNumberOfVotes();
     renderThreeRandomImgs();
   } else {
     leftImg.removeEventListener("click", clickingOn);
@@ -133,13 +137,13 @@ function clickingOn(event) {
     rightImg.removeEventListener("click", clickingOn);
 
     //////creat un order list
-
+    
     let unOrderList = document.getElementById("unOrderList");
 
     let li;
     for (let i = 0; i < arrayObject.length; i++) {
       li = document.createElement("li");
-      unOrderList.append(li);
+      unOrderList.appendChild(li);
       li.textContent = `${arrayObject[i].name} had ${arrayObject[i].vote} votes, and was seen
              ${arrayObject[i].numOfShown} times.`;
     }
@@ -150,7 +154,9 @@ function clickingOn(event) {
     }
     
   }
+  
   chartBusMall();
+  
 
  let resultButton = document.getElementById("bnt");
  resultButton.addEventListener("click", clickingOn);
@@ -168,7 +174,7 @@ var chart = new Chart(ctx, {
         labels: arrayOfPictureName,
         datasets: [{
             label: 'Number Of Votes',
-            backgroundColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgb(0, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: [0, 10, 5, 2, 20, 30, 45]
         },{
@@ -185,6 +191,53 @@ var chart = new Chart(ctx, {
     // Configuration options go here
     options: {}
 });
+//savedNumberOfVotes();
+}
 
+function savedNumberOfVotes(){
+
+  let numberOfVotes = JSON.stringify(arrayObject);
+
+  localStorage . setItem ('all my votes' , numberOfVotes);
+}
+
+function getVotes(){
+
+  let  gettingVotes = localStorage .getItem('all my votes');
+  let  votes= JSON.parse(gettingVotes);
+
+
+  if (votes){
+
+    arrayObject=votes;
+  }
+
+  else{
+
+    votes=[];
+
+  }
+  clickingOn();
 
 }
+getVotes();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
