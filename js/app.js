@@ -6,7 +6,7 @@ let arrayObject = [];
 let arrayOfvote = [];
 let arrayOfShown = [];
 let arrayOfPictureName=[];
-
+let arr=[0,0,0];
 let leftImg = document.getElementById("leftImg");
 let middleImg = document.getElementById("middleImg");
 let rightImg = document.getElementById("rightImg");
@@ -69,7 +69,7 @@ function renderThreeRandomImgs() {
 
    while(same){
 
-  if (testImage( leftImgIndex,imageIndexFirst) {
+  if (testImage( leftImgIndex,imageIndexFirst)) {
     leftImgIndex = generatRandomIndex();
     
   } else if (
@@ -89,6 +89,11 @@ function renderThreeRandomImgs() {
   console.log(leftImgIndex);
   console.log(middleImgIndex);
   console.log(rightImgIndex);
+
+ arr[0]=leftImgIndex;
+ arr[1]=middleImgIndex;
+ arr[2]=rightImgIndex;
+
   let pictureLeft = document.getElementById("leftImg");
 
   let pictureMiddle = document.getElementById("middleImg");
@@ -110,8 +115,11 @@ renderThreeRandomImgs();
 // generat random value
 
 function generatRandomIndex() {
+  
   let randomIndex = Math.floor(Math.random() * arrayObject.length);
-
+while(arr.includes(randomIndex)){
+  randomIndex = Math.floor(Math.random() * arrayObject.length);
+}
   return randomIndex;
 }
 
@@ -161,8 +169,9 @@ function clickingOn(event) {
 
     for (let v = 0; v < arrayObject.length; v++) {
       arrayOfvote.push(arrayObject[v].vote);
-      arrayOfShown.push[arrayObject[v].numOfShown];
+      arrayOfShown.push(arrayObject[v].numOfShown);
     }
+    console.log(arrayOfShown);
     chartBusMall();
   }
   
@@ -187,13 +196,13 @@ var chart = new Chart(ctx, {
             label: 'Number Of Votes',
             backgroundColor: 'rgb(0, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45]
+            data: arrayOfvote
         },{
 
             label: 'Nmber Of Veiws',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45]
+            data: arrayOfShown
     }]
     },
 
